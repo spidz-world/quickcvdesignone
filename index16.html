@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QuickCV</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Montserrat:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body,
+      html {
+        min-height: 100vh;
+        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+        color: #ffffff;
+      }
+
+      a {
+        cursor: pointer;
+      }
+
+      /* NAVIGATION */
+      nav {
+        background: rgba(0, 191, 255, 0.08);
+        backdrop-filter: blur(6px);
+        padding: 15px 30px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+      }
+
+      nav div a {
+        color: #cfeeff;
+        text-decoration: none;
+        font-weight: 600;
+        padding-bottom: 4px;
+        transition: color 0.3s;
+      }
+
+      nav div a:hover,
+      nav div a.active {
+        color: #00bfff;
+        border-bottom: 2px solid #00bfff;
+      }
+
+      /* Landing Section */
+      .landing {
+        /* min-height: 100vh; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+        max-width: 800px;
+        margin: 0 auto 60px;
+        text-align: center;
+      }
+
+      .landing-border {
+        width: 100%;
+        max-width: 800px;
+        padding: 40px 30px;
+        border: 2px solid rgba(0, 191, 255, 0.6);
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+        transition: all 0.3s ease-in-out;
+      }
+
+      .landing-border:hover {
+        box-shadow: 0 0 40px rgba(0, 191, 255, 0.6);
+      }
+
+      .logo-box {
+        margin-bottom: 40px;
+        animation: fadeInDown 1s ease-in-out;
+      }
+
+      .logo-text {
+        font-family: "Montserrat", sans-serif;
+        font-size: 3rem;
+        font-weight: 700;
+        color: #fff;
+        padding: 20px 30px;
+        border: 3px dashed #00bfff;
+        border-radius: 25px;
+        box-shadow: 0 0 25px rgba(0, 191, 255, 0.8);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        text-shadow: 2px 2px 5px #000;
+        transition: all 0.4s ease-in-out;
+        animation: glow 3s ease-in-out infinite alternate;
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .logo-text::before {
+        content: "\270D"; /* ✍️ */
+        font-size: 2.5rem;
+        animation: pulse 2s infinite;
+      }
+
+      .logo-text:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 50px rgba(0, 191, 255, 1);
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(1.1);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes glow {
+        from {
+          box-shadow: 0 0 10px #00bfff;
+        }
+        to {
+          box-shadow: 0 0 30px #00ffff, 0 0 60px #00bfff;
+        }
+      }
+
+      @keyframes fadeInDown {
+        0% {
+          opacity: 0;
+          transform: translateY(-40px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .intro {
+        animation: fadeInUp 1s ease-in-out;
+      }
+
+      .intro h1 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #cfeeff;
+        text-shadow: 1px 1px 4px #000;
+      }
+
+      .intro p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        color: #d4d4d4;
+      }
+
+      .intro a {
+        text-decoration: none;
+        padding: 15px 30px;
+        background: linear-gradient(to right, #00bfff, #009acd);
+        color: #fff;
+        font-weight: 600;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 191, 255, 0.5);
+        display: inline-block;
+      }
+
+      .intro a:hover {
+        background: linear-gradient(to right, #009acd, #007aa3);
+        transform: scale(1.05);
+      }
+
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Form Section */
+      #form-section {
+        max-width: 800px;
+        margin: 0 auto 60px;
+        padding: 40px 30px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(8px);
+        border: 2px solid rgba(0, 191, 255, 0.6);
+        box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+        color: #e0e7ff;
+        font-size: 1rem;
+      }
+
+      #form-section h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        font-size: 2rem;
+        color: #00bfff;
+        text-shadow: 1px 1px 5px #000;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 1fr;
+        /* gap: 20px 30px; */
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        margin-top: 16px;
+        /* color: #a8cfff; */
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="number"],
+      textarea,
+      input[type="file"] {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 2px solid #00bfff;
+        background: rgba(0, 0, 0, 0.15);
+        color: #fff;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+        outline-offset: 2px;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="number"]:focus,
+      textarea:focus,
+      input[type="file"]:focus {
+        border-color: #009acd;
+        background: rgba(0, 0, 0, 0.25);
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 70px;
+      }
+
+      .full-width {
+        grid-column: 1 / -1;
+      }
+
+      /* Toggle switch for photo */
+      .toggle-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 46px;
+        height: 26px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        border-radius: 26px;
+        transition: 0.4s;
+        box-shadow: 0 0 8px #0002 inset;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        border-radius: 50%;
+        transition: 0.4s;
+        box-shadow: 0 0 3px #0003;
+      }
+
+      input:checked + .slider {
+        background-color: #00bfff;
+        box-shadow: 0 0 12px #00bfff;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(20px);
+      }
+
+      /* Price and buttons area */
+      .price-display {
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: #00d4ff;
+        grid-column: 1 / -1;
+        text-align: center;
+        text-shadow: 1px 1px 5px #000;
+        margin-bottom: 20px;
+      }
+
+      .btn-container {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+      }
+
+      button {
+        padding: 15px 40px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 15px;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(to right, #00bfff, #009acd);
+        color: white;
+        box-shadow: 0 5px 15px rgba(0, 191, 255, 0.6);
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+
+      button:hover {
+        background: linear-gradient(to right, #009acd, #007aa3);
+        transform: scale(1.05);
+      }
+
+      /* INPUTS, BUTTONS, TOGGLE, ETC... */
+      /* KEEP ALL YOUR EXISTING FORM STYLES AS IS */
+      /* ... */
+
+      /* Testimonials, How It Works, Contact */
+      .testimonials,
+      .how-it-works,
+      .contact {
+        max-width: 800px;
+        margin: 0 auto 60px;
+        padding: 40px 30px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(8px);
+        border: 2px solid rgba(0, 191, 255, 0.6);
+        box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+        color: #e0f7ff;
+        text-shadow: 1px 1px 3px #000;
+      }
+
+      .testimonials h2,
+      .how-it-works h2,
+      .contact h2 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #00bfff;
+        text-align: center;
+      }
+
+      .testimonials blockquote {
+        font-style: italic;
+        font-size: 1.1rem;
+        margin: 15px auto;
+        text-align: center;
+        color: #cfeeff;
+      }
+
+      .how-it-works ol {
+        list-style: decimal inside;
+        padding-left: 10px;
+        color: #d4f1ff;
+      }
+
+      .how-it-works li {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+
+      .contact p {
+        font-size: 1.1rem;
+        text-align: center;
+        margin: 10px 0;
+      }
+
+      .contact a {
+        color: #00d4ff;
+        text-decoration: underline;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.02);
+        color: #a0cfe3;
+        font-size: 0.9rem;
+        border-top: 1px solid rgba(0, 191, 255, 0.3);
+      }
+
+      @media (max-width: 600px) {
+        nav {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .nav-links {
+          justify-content: space-around;
+          gap: 20px;
+        }
+      }
+
+      @media (max-width: 830px) {
+        .testimonials, .how-it-works, .contact 
+        {
+          width: 90%;
+        }
+
+        #form-section
+        {
+          width: 92%;
+          padding: 40px 20px;
+        }
+      }
+
+      @media (min-width: 470px) {
+        .landing {
+        min-height: 100vh;
+      }
+      }
+
+      @media (max-width: 470px) {
+        .logo-text
+        {
+          font-size: 2rem;
+          padding: 10px 15px;
+        }
+
+        .logo-text::before
+        {
+          font-size: 1.5rem;
+        }
+
+        .intro h1
+        {
+          font-size: 1.3rem;
+        }
+
+        .testimonials, .how-it-works, .contact 
+        {
+          width: 96%;
+        }
+
+        #form-section
+        {
+          width: 97%;
+          padding: 40px 20px;
+        }
+
+        form
+        {
+          grid-template-columns: 1fr;
+        }
+
+        .testimonials h2, .how-it-works h2, .contact h2
+        {
+          font-size: 1.5rem;
+        }
+
+        #form-section h2
+        {
+          font-size: 1.5rem;
+        }
+
+        
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-links">
+        <a href="#form-section" class="active">Order</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Landing Section -->
+    <section class="landing" aria-label="Landing Section">
+      <div class="landing-border">
+        <div class="logo-box">
+          <div class="logo-text">QuickCV</div>
+        </div>
+        <div class="intro">
+          <h1>Your clean, professional CV for just R20 per page</h1>
+          <p>
+            Include extra pages, your photo, and personal notes. Fast delivery.
+            No hassle.
+          </p>
+          <a href="#form-section">Get Started</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+      <h2>How It Works</h2>
+      <ol>
+        <li>Fill out the form with your details</li>
+        <li>Upload your job experience or academic background</li>
+        <li>We design your professional CV</li>
+        <li>You receive it via email in PDF format</li>
+      </ol>
+    </section>
+
+    <!-- Order Form Section -->
+    <section id="form-section" aria-label="Order Form Section">
+      <!-- KEEP YOUR EXISTING FORM CODE AS IS HERE -->
+      <h2>Get Your CV – Starting at R20</h2>
+      <form id="cvOrderForm" novalidate>
+        <label for="fullName">Full Name *</label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          placeholder="Your full name"
+          required
+        />
+
+        <label for="contactNumber">Contact Number *</label>
+        <input
+          type="text"
+          id="contactNumber"
+          name="contactNumber"
+          placeholder="e.g. 0712345678"
+          required
+          pattern="\\d{9,15}"
+          title="Enter a valid phone number"
+        />
+
+        <label for="emailAddress">Email Address *</label>
+        <input
+          type="email"
+          id="emailAddress"
+          name="emailAddress"
+          placeholder="you@example.com"
+          required
+        />
+
+        <label for="educationHistory">Education History</label>
+        <textarea
+          id="educationHistory"
+          name="educationHistory"
+          placeholder="List your education"
+          rows="3"
+        ></textarea>
+
+        <label for="workExperience">Work Experience</label>
+        <textarea
+          id="workExperience"
+          name="workExperience"
+          placeholder="Describe your work experience"
+          rows="3"
+        ></textarea>
+
+        <label for="skillsAchievements">Skills & Achievements</label>
+        <textarea
+          id="skillsAchievements"
+          name="skillsAchievements"
+          placeholder="Your skills and achievements"
+          rows="3"
+        ></textarea>
+
+        <label for="numberOfPages">Number of Pages *</label>
+        <input
+          type="number"
+          id="numberOfPages"
+          name="numberOfPages"
+          min="1"
+          max="10"
+          value="1"
+          required
+        />
+
+        <label for="includePhoto">Include Photo?</label>
+        <div class="toggle-container full-width">
+          <label class="switch">
+            <input type="checkbox" id="includePhoto" name="includePhoto" />
+            <span class="slider"></span>
+          </label>
+          <span>Yes / No</span>
+        </div>
+
+        <label for="uploadFile">Upload Old CV / Photo / Notes</label>
+        <input
+          type="file"
+          id="uploadFile"
+          name="uploadFile"
+          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt"
+        />
+
+        <label for="extraNotes" class="full-width">Extra Notes</label>
+        <textarea
+          id="extraNotes"
+          name="extraNotes"
+          placeholder="Anything else you want us to know"
+          rows="4"
+          class="full-width"
+        ></textarea>
+
+        <div class="price-display" aria-live="polite" aria-atomic="true">
+          Total: R<span id="totalPrice">20</span>
+        </div>
+
+        <div class="btn-container">
+          <button type="submit">SUBMIT</button>
+          <button type="button" id="payNowBtn">PAY NOW</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+      <h2>What Our Users Say</h2>
+      <blockquote>“I got the job! Thank you QuickCV!” — Lungile M.</blockquote>
+      <blockquote>
+        “I loved how clean it looked. Super fast too!” — James D.
+      </blockquote>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <h2>Need Help?</h2>
+      <p>
+        Email us at <a href="mailto:help@quickcv.co.za">help@quickcv.co.za</a>
+      </p>
+      <p>
+        Or reach us on WhatsApp at
+        <a href="https://wa.me/27712345678">+27 71 234 5678</a>
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>&copy; 2025 QuickCV. All rights reserved.</footer>
+
+    <!-- Your existing script here -->
+    <script>
+      const pricePerPage = 20;
+      const photoPrice = 20;
+
+      const form = document.getElementById("cvOrderForm");
+      const numberOfPagesInput = document.getElementById("numberOfPages");
+      const includePhotoCheckbox = document.getElementById("includePhoto");
+      const totalPriceSpan = document.getElementById("totalPrice");
+      const payNowBtn = document.getElementById("payNowBtn");
+
+      function calculatePrice() {
+        const pages = Number(numberOfPagesInput.value) || 1;
+        const photo = includePhotoCheckbox.checked ? photoPrice : 0;
+        const extraPages = pages > 1 ? (pages - 1) * pricePerPage : 0;
+        const total = pricePerPage + extraPages + photo;
+        totalPriceSpan.textContent = total;
+        return total;
+      }
+
+      numberOfPagesInput.addEventListener("input", calculatePrice);
+      includePhotoCheckbox.addEventListener("change", calculatePrice);
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const totalAmount = calculatePrice();
+
+        alert(
+          `Thank you! We’ll contact you via WhatsApp or email shortly. Please confirm your payment of R${totalAmount} via CashSend or Bank Transfer.`
+        );
+        form.reset();
+        totalPriceSpan.textContent = pricePerPage;
+      });
+
+      payNowBtn.addEventListener("click", () => {
+        const totalAmount = calculatePrice();
+        alert(
+          `Please confirm your payment of R${totalAmount} via CashSend or Bank Transfer.`
+        );
+      });
+
+      // Initial price calculation on page load
+      calculatePrice();
+    </script>
+  </body>
+</html>
